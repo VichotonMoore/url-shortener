@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 28px;
+        }
+
+        p.subtitle {
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            margin-bottom: 12px;
+            transition: border 0.2s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .result {
+            margin-top: 24px;
+            padding: 16px;
+            background: #f0f4ff;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .result p {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 6px;
+        }
+
+        .result a {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 18px;
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .result a:hover {
+            text-decoration: underline;
+        }
+
+        .original {
+            margin-top: 8px;
+            font-size: 12px;
+            color: #aaa;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🔗 URL Shortener</h1>
+        <p class="subtitle">Acorta cualquier enlace en segundos</p>
+
+        <form method="POST" action="/shorten">
+            <input
+                type="text"
+                name="url"
+                placeholder="https://ejemplo.com/url-muy-larga..."
+                required
+            />
+            <button type="submit">Acortar URL</button>
+        </form>
+
+        {% if short_url %}
+        <div class="result">
+            <p>✅ Tu URL acortada:</p>
+            <a href="{{ short_url }}" target="_blank">{{ short_url }}</a>
+            <p class="original">Original: {{ original }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
